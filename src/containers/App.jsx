@@ -7,19 +7,37 @@ import Education from '../components/Education';
 import Certificates from '../components/Certificates';
 import Experience from '../components/Experience';
 import Skills from '../components/Skills';
+import useGetData from '../hooks/useGetData';
 
 const App = () =>{
-    return(
+    const data = useGetData();
+    console.log("data :", data);
+    return data.length === 0 ? <h1>Cargando....</h1> :(
         <Main>
             <Sidebar>
-                <About />
+                <About 
+                    avatar={data.avatar}
+                    name={data.name}
+                    profession={data.profession}
+                    bio={data.bio}
+                    address={data.address}
+                    social={data.social}
+                />
             </Sidebar>
 
             <Info>
-                <Education/>
-                <Experience/>
-                <Certificates/>
-                <Skills/>
+                <Education
+                    data = {data.education}
+                />
+                <Experience
+                    data={data.experience}
+                />
+                <Certificates
+                    data={data.certificate}
+                />
+                <Skills
+                    data={data.skills}
+                />
             </Info>
 
         </Main>
